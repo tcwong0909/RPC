@@ -3,8 +3,7 @@ package com.tcwong.service;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 /**
  * Description
@@ -15,7 +14,9 @@ import java.util.concurrent.Executors;
  */
 public class RpcProxyServer {
 
-    ExecutorService executorService = Executors.newCachedThreadPool();
+    ExecutorService executorService = new ThreadPoolExecutor(5, 200,
+            0L, TimeUnit.MILLISECONDS,
+            new LinkedBlockingQueue<Runnable>(1024), new ThreadPoolExecutor.AbortPolicy());
 
     public void publisher(Integer port, Object service) {
         ServerSocket serverSocket;

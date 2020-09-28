@@ -14,6 +14,7 @@ public class App {
         user.setAge(18);
         RpcProxyClient rpcProxyClient = new RpcProxyClient();
         HelloService helloService = rpcProxyClient.clientProxy(HelloService.class, "localhost", 8000);
-        helloService.sayHello(user);
+        String result = helloService.sayHello(user);
+        System.out.println(result);
     }
 }
